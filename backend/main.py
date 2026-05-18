@@ -1,0 +1,63 @@
+import numpy as np
+import pandas as pd
+from fastapi import FastAPI, Query, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
+from services.alpha_vantage import search_symbol, get_daily_prices
+from services.indicators import compute_indicators
+from services.signals import generate_signals
+
+
+# uvicorn main:app --reload / uvicorn main:app --host 0.0.0.0 --port 8000
+# uvicorn -> lance le serveur ASGI Python
+# main:app -> fichier main.py , objet app
+# add --host 0.0.0.0 -> autorise la connexion réseau
+# --port 800 -> lance le backend sur le port 800
+
+app = FastAPI(title="Market Signal Lab API")
+
+# Ajoute le middleware CORS à ton application FastAPI
+app.add_middleware(
+    # Type de middleware utilisé
+    CORSMiddleware,
+    # Liste des URLs autorisées à appeler l'API
+    allow_origins=[
+        # Autorise le frontend lancé en local
+        "http://localhost:3000",
+        # Autorise le frontend lancé via l'adresse réseau
+        "http://10.198.209.197:3000",
+    ],
+    # Autorise l'envoi des cookies / sessions / authentification
+    allow_credentials=True,
+    # Autorise toutes les méthodes HTTP :
+    # GET, POST, PUT, DELETE, etc.
+    allow_methods=["*"],
+    # Autorise tous les headers HTTP
+    allow_headers=["*"],
+)
+
+@app.get("/search")
+def search(query: str = Query(..., min_length=1)):
+    return {"query": query, "results": search_symbol(query)}
+
+@app.get("/lagging")
+def lagging(symbol: str = Query(..., min_length=1)):
+    try:
+        df = get_daily_prices(symbol)
+        df = compute_indicators(df)
+        df = generate_signals(df)
+
+        df = df.reset_index().rename(columns={"index": "date"})
+        df["date"] = df["date"].astype(str)
+
+        # Remplacer inf, -inf et NaN par None pour JSON
+        df = df.replace([np.inf, -np.inf], np.nan)
+        df = df.astype(object).where(pd.notna(df), None)
+
+        return {
+            "symbol": symbol,
+            "data": df.where(df.notna(), None).to_dict(orient="records")
+        }
+
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
