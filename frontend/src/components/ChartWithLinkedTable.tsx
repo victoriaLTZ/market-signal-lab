@@ -6,6 +6,9 @@ import { useState } from "react";
 // On importe le graphique
 import LaggingChart from "./laggingChart";
 
+//On importe les indicateurs
+import IndicatorHelp from "./indicatorHelp";
+
 // On importe le tableau
 import DataTable from "./DataTable";
 
@@ -34,6 +37,7 @@ export default function ChartWithLinkedTable({
         // Cette fonction est appelée quand l'utilisateur zoome
         onRangeChange={() => {}}
       />
+      <IndicatorHelp/>
           {/* Bouton pour afficher ou cacher les données */}
           <button
             // Au clic, on inverse l'état actuel
