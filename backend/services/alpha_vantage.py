@@ -61,6 +61,8 @@ def get_daily_prices(symbol: str):
     response.raise_for_status()
 
     data = response.json()
+    print("API KEY LOADED:", bool(API_KEY))
+    print("RAW ALPHA RESPONSE:", data)
 
     if "Time Series (Daily)" not in data:
         raise ValueError(data)
