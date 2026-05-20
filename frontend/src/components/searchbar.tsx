@@ -30,9 +30,8 @@ export default function SearchBar() {
     setLaggingData(null);
 
     const response = await fetch(
-      `http://127.0.0.1:8000/search?query=${encodeURIComponent(query)}`
-    );
-
+      `${process.env.NEXT_PUBLIC_API_URL}/search?query=${encodeURIComponent(query)}`
+    ); // récupère la variable d'environnement définie dans frontend/env.local
     const data = await response.json();
     console.log("Full raw response:", JSON.stringify(data, null, 2));
     // Vérifie la forme exacte de la réponse reçue depuis FastAPI
