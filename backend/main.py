@@ -24,8 +24,8 @@ app.add_middleware(
     allow_origins=[
         # Autorise le frontend lancé en local
         "http://localhost:3000",
-        # Autorise le frontend lancé via l'adresse réseau
-        "http://10.198.209.197:3000",
+        # Front déployé Vercel
+        "https://market-signal-lab.vercel.app",
     ],
     # Autorise l'envoi des cookies / sessions / authentification
     allow_credentials=True,
