@@ -27,6 +27,7 @@ app.add_middleware(
         # Front déployé Vercel
         "https://market-signal-lab.vercel.app",
     ],
+    allow_origin_regex=r"https://.*\.vercel\.app",
     # Autorise l'envoi des cookies / sessions / authentification
     allow_credentials=True,
     # Autorise toutes les méthodes HTTP :
