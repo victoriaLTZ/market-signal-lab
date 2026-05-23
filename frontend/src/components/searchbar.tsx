@@ -57,7 +57,7 @@ export default function SearchBar() {
   setSelectedSymbol(symbol);
 
   const response = await fetch(
-    `http://127.0.0.1:8000/lagging?symbol=${encodeURIComponent(symbol)}`
+    `${process.env.NEXT_PUBLIC_API_URL}/lagging?symbol=${encodeURIComponent(symbol)}`
   );
   // transfo de la réponse JSON en object javaScript
   const data = await response.json();
