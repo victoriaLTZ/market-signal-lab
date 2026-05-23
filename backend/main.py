@@ -3,7 +3,7 @@ import pandas as pd
 from fastapi import FastAPI, Query, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
-from services.alpha_vantage import search_symbol, get_daily_prices
+from services.market_database import search_symbol_with_fallback, get_daily_prices_with_fallback
 from services.indicators import compute_indicators
 from services.signals import generate_signals
 
@@ -39,12 +39,12 @@ app.add_middleware(
 
 @app.get("/search")
 def search(query: str = Query(..., min_length=1)):
-    return {"query": query, "results": search_symbol(query)}
+    return {"query": query, "results": search_symbol_with_fallback(query)}
 
 @app.get("/lagging")
 def lagging(symbol: str = Query(..., min_length=1)):
     try:
-        df = get_daily_prices(symbol)
+        df = get_daily_prices_with_fallback(symbol)
         df = compute_indicators(df)
         df = generate_signals(df)
 
