@@ -91,7 +91,7 @@ return (
 
       </div>
 
-      <p className="mt-3 text-sm text-yellow-300">
+      <p className="mt-3 text-sm text-slate-300">
         Results count: {results.length}
       </p>
 

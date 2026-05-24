@@ -9,6 +9,9 @@ import LaggingChart from "./laggingChart";
 //On importe les indicateurs
 import IndicatorHelp from "./indicatorHelp";
 
+//On importe les données autour des indicateurs
+import IndicatorObservation from "./indicatorObs";
+
 // On importe le tableau
 import DataTable from "./DataTable";
 
@@ -38,15 +41,18 @@ export default function ChartWithLinkedTable({
         onRangeChange={() => {}}
       />
       <IndicatorHelp/>
+
+      <IndicatorObservation data={data} />
+      <div className="mt-8">
           {/* Bouton pour afficher ou cacher les données */}
           <button
             // Au clic, on inverse l'état actuel
             onClick={() => setShowTable(!showTable)}
-            className="rounded-lg bg-blue-600 px-4 py-2 font-semibold text-white hover:bg-blue-700"
-          >
+            className="rounded-xl bg-blue-600 px-8 py-4 text-white font-semibold hover:bg-blue-500">
             {/* Texte du bouton selon l'état actuel */}
-            {showTable ? "Masquer les données" : "Afficher les données"}
+            {showTable ? "Hide Dataset" : "Show Dataset"}
           </button>
+        </div>
 
           {/* Le tableau s'affiche seulement si showTable vaut true */}
           {showTable && (
@@ -54,6 +60,7 @@ export default function ChartWithLinkedTable({
               <DataTable data={data} />
             </div>
           )}
+          
     </section>
   );
 }
