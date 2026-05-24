@@ -3,6 +3,10 @@ from services.alpha_vantage import (
     get_daily_prices
 )
 
+from services.yahoo_finance import (
+    get_daily_prices_yahoo
+)
+
 from services.finnhub import (
     search_symbol_finnhub,
     get_daily_prices_finnhub
@@ -33,12 +37,12 @@ def search_symbol_with_fallback(query: str):
     
 def get_daily_prices_with_fallback(symbol: str):
     try:
-        print("Trying Finnhub first...", flush=True)
+        print("Trying yahoo finance", flush=True)
 
-        return get_daily_prices_finnhub(symbol)
+        return get_daily_prices_yahoo(symbol)
 
-    except Exception as finnhub_error:
-        print("Finnhub failed:", finnhub_error, flush=True)
+    except Exception as yahoo_error:
+        print("Yahoo failed:", yahoo_error, flush=True)
 
         try:
             print("Trying Alpha Vantage fallback...", flush=True)
@@ -50,6 +54,6 @@ def get_daily_prices_with_fallback(symbol: str):
 
             raise ValueError(
                 f"No data available for {symbol}. "
-                f"Finnhub error: {finnhub_error}. "
+                f"Finnhub error: {yahoo_error}. "
                 f"Alpha Vantage error: {alpha_error}."
             )
