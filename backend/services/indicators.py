@@ -3,8 +3,8 @@ def compute_indicators(df):
 
     df["RJ"] = df["close"].pct_change() * 100
 
-    df["MA20"] = df["close"].rolling(window=10).mean()
-    df["MA50"] = df["close"].rolling(window=30).mean()
+    df["MA20"] = df["close"].rolling(window=20).mean()
+    df["MA50"] = df["close"].rolling(window=50).mean()
 
     delta = df["close"].diff()
     gain = delta.clip(lower=0)
