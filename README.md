@@ -1,281 +1,120 @@
 # Market Signal Lab
 
-Interactive financial market analysis application combining technical indicators, signal generation and interactive visualizations.
+Market Signal Lab is a financial analytics application designed to explore stock market behaviour through technical indicators and trading signals.
 
-Market Signal Lab is a personal portfolio project developed to explore financial market behaviour through **lagging indicators**, while preparing future developments towards **machine learning based leading signals**.
+The project aims to help users visualize market trends, detect technical signals, and understand the context surrounding market events.
 
----
-
-## Live Demo
-
-Frontend (Vercel):  
-https://market-signal-lab.vercel.app
-
-Backend API (Render):  
-https://market-signal-lab.onrender.com
-
-GitHub Repository:  
-https://github.com/victoriaLTZ/market-signal-lab
-
----
-
-## Project Objectives
-
-The objective of this project is to build an interactive market analysis tool allowing users to:
-
-- Search financial assets
-- Visualize price evolution
-- Compute lagging indicators
-- Detect technical market signals
-- Explore generated signals through interactive charts and tables
-- Prepare future predictive / machine learning approaches
-
-Current version focuses on **technical analysis and lagging indicators**.
-
-Future versions aim to introduce **leading indicators using machine learning models**.
+🔗 Live application: https://market-signal-lab.vercel.app/
 
 ---
 
 ## Features
 
-### Market exploration
+Current version includes:
 
-✅ Asset search via Alpha Vantage API
+✔ Stock search engine
 
-✅ Historical market data retrieval
+✔ Interactive price visualization
 
-✅ Interactive visualization of market evolution
+✔ Technical indicators:
 
----
-
-### Technical indicators
-
-Implemented indicators:
-
-- MA20 (20-day moving average)
-- MA50 (50-day moving average)
-- Spread between moving averages
-- Returns (RJ)
+- MA20
+- MA50
 - RSI
-- Trend detection
 
----
-
-### Signal generation
-
-Implemented signals:
+✔ Signal detection:
 
 - Golden Cross
 - Death Cross
-- LOOK OUT BUY
-- LOOK OUT SELL
-- BUY
-- SELL
+- BUY / SELL
+- LOOK OUT BUY / SELL
+
+✔ Signal exploration module:
+
+Inspect market behaviour around detected events.
+
+✔ Dataset exploration
 
 ---
 
-### Visualization layer
+## Example workflow
 
-Interactive dashboard including:
+1. Search a stock
 
-✅ Plotly interactive charts
+2. Select the market symbol
 
-✅ Toggleable chart series
+3. Visualize price evolution and indicators
 
-✅ Market data table
+4. Detect technical signals
 
-✅ Indicator explanations / educational tooltips
-
----
-
-## Architecture
-
-```text
-Frontend (Next.js + React + Plotly)
-                ↓
-REST API
-                ↓
-Backend (FastAPI)
-                ↓
-Alpha Vantage API
-```
-
-Deployment:
-
-```text
-Frontend → Vercel
-
-Backend → Render
-```
+5. Explore market context around signals
 
 ---
 
-## Tech Stack
+## Tech stack
 
-### Frontend
+Frontend:
 
 - Next.js
 - React
-- TypeScript
-- Plotly.js
-- Tailwind CSS
+- Plotly
+- TailwindCSS
 
-### Backend
+Backend:
 
 - FastAPI
-- Python
 - Pandas
-- Requests
 
-### Deployment
+Market data:
 
-- GitHub
-- Render
+- Finnhub
+- Alpha Vantage
+
+Deployment:
+
 - Vercel
+- Render
 
 ---
 
-## Implemented Indicators
+## Future developments
 
-| Indicator | Description |
-|-----------|-------------|
-| MA20 | Moving average over 20 trading days |
-| MA50 | Moving average over 50 trading days |
-| Golden Cross | MA20 crossing above MA50 |
-| Death Cross | MA20 crossing below MA50 |
-| LOOK OUT BUY | Early bullish observation signal |
-| LOOK OUT SELL | Early bearish observation signal |
-| BUY | Strategy generated buy signal |
-| SELL | Strategy generated sell signal |
+Planned improvements:
 
----
+- Leading indicators
 
-## Local Installation
+- Predictive models
 
-Clone repository:
+- Backtesting strategies
 
-```bash
-git clone https://github.com/victoriaLTZ/market-signal-lab.git
+- Portfolio analytics
 
-cd market-signal-lab
-```
+- AI-assisted signal generation
 
 ---
 
-### Backend
+## Why this project?
 
-```bash
-cd backend
+I built this project to combine:
 
-pip install -r requirements.txt
+- Financial analysis
+- Data science
+- Decision-support systems
+- Interactive visualization
 
-uvicorn main:app --host 0.0.0.0 --port 8000
-```
-
----
-
-### Frontend
-
-```bash
-cd frontend
-
-npm install
-
-npm run dev
-```
-
-Frontend available at:
-
-```text
-http://localhost:3000
-```
-
-Backend available at:
-
-```text
-http://localhost:8000
-```
+The long-term objective is to evolve the application from lagging indicators toward predictive market analysis and leading signals.
 
 ---
 
-## Environment Variables
+## Project preview
 
-### Backend
-
-Create:
-
-```text
-backend/.env
-```
-
-Content:
-
-```env
-ALPHA_VANTAGE_API_KEY=YOUR_API_KEY
-```
-
+![alt text](image.png)
 ---
-
-### Frontend
-
-Create:
-
-```text
-frontend/.env.local
-```
-
-Content:
-
-```env
-NEXT_PUBLIC_API_URL=https://market-signal-lab.onrender.com
-```
-
+![alt text](image-1.png)
 ---
+![alt text](image-2.png)
+## Author
 
-## ⚠ Known Limitations
+VSC
 
-Current deployment relies on the free Alpha Vantage plan.
-
-Limitations:
-
-- 25 requests / day
-- API rate limits may affect demonstrations
-
-Future improvements may include:
-
-- Local cache
-- Demo datasets
-- Alternative financial APIs
-- Offline mode
-
----
-
-## Roadmap
-
-Current version:
-
-✅ Lagging indicators platform
-
-Planned developments:
-
-⬜ Machine learning leading indicators
-
-⬜ BUY / SELL prediction engine
-
-⬜ Market anticipation models
-
-⬜ Signal probability estimation
-
-⬜ Strategy comparison & backtesting
-
-⬜ Explainable AI layer
-
----
-
-## 👤 Author
-
-**VSC**
-
-Data Science • Finance • Business • AI
-
-Portfolio project developed to explore financial analysis, data engineering and future predictive modelling approaches.
+Data Science • Financial Analytics • AI
