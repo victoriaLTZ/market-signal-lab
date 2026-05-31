@@ -340,41 +340,54 @@ export default function IndicatorObservation({ data }: Props) {
 
           <div className="mt-4 max-h-[500px] overflow-auto rounded-lg border border-slate-800">
 
-            <table className="w-full min-w-[900px] text-left text-sm text-slate-200">
-              <thead className="sticky top-0 bg-slate-900 text-slate-300">
-                <tr>
-                  <th className="px-3 py-2">Date</th>
-                  <th className="px-3 py-2">Close</th>
-                  <th className="px-3 py-2">Daily Return</th>
-                  <th className="px-3 py-2">RSI</th>
-                  <th className="px-3 py-2">MA20</th>
-                  <th className="px-3 py-2">MA50</th>
-                  <th className="px-3 py-2">Spread</th>
-                  <th className="px-3 py-2">Trend</th>
-                  <th className="px-3 py-2">Lookout Buy</th>
-                  <th className="px-3 py-2">Lookout Sell</th>
-                  <th className="px-3 py-2">Decision</th>
-                </tr>
-              </thead>
+            <table className="w-full min-w-[800px] text-left text-sm text-slate-200">
+            <thead className="sticky top-0 bg-slate-900 text-slate-300">
+              <tr>
+                <th className="px-3 py-2">Date</th>
+                <th className="px-3 py-2">Close</th>
+                <th className="px-3 py-2">RSI</th>
+                <th className="px-3 py-2">Volume Ratio</th>
+                <th className="px-3 py-2">Distance MA20</th>
+                <th className="px-3 py-2">Volatility 20D</th>
+                <th className="px-3 py-2">Decision</th>
+              </tr>
+            </thead>
 
-              <tbody>
-                {observationData.map((row) => (
-                  <tr key={`${selectedIndicator}-${row.date}`} className="border-t border-slate-800">
-                    <td className="px-3 py-2">{row.date}</td>
-                    <td className="px-3 py-2">{formatNumber(row.close)}</td>
-                    <td className="px-3 py-2">{formatNumber(row.RJ)}</td>
-                    <td className="px-3 py-2">{formatNumber(row.RSI)}</td>
-                    <td className="px-3 py-2">{formatNumber(row.MA20)}</td>
-                    <td className="px-3 py-2">{formatNumber(row.MA50)}</td>
-                    <td className="px-3 py-2">{formatNumber(row.spread)}</td>
-                    <td className="px-3 py-2">{row.trend ?? "-"}</td>
-                    <td className="px-3 py-2">{row.lookout_buy ? "True" : "-"}</td>
-                    <td className="px-3 py-2">{row.lookout_sell ? "True" : "-"}</td>
-                    <td className="px-3 py-2 font-semibold">{row.decision ?? "-"}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <tbody>
+              {observationData.map((row) => (
+                <tr
+                  key={`${selectedIndicator}-${row.date}`}
+                  className="border-t border-slate-800"
+                >
+                  <td className="px-3 py-2">{row.date}</td>
+
+                  <td className="px-3 py-2">
+                    {formatNumber(row.close)}
+                  </td>
+
+                  <td className="px-3 py-2">
+                    {formatNumber(row.RSI)}
+                  </td>
+
+                  <td className="px-3 py-2">
+                    {formatNumber(row.volume_ratio)}
+                  </td>
+
+                  <td className="px-3 py-2">
+                    {formatNumber(row.distance_ma20)}
+                  </td>
+
+                  <td className="px-3 py-2">
+                    {formatNumber(row.volatility_20d)}
+                  </td>
+
+                  <td className="px-3 py-2 font-semibold">
+                    {row.decision ?? "-"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
           </div>
 
       )}

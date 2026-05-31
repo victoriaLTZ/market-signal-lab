@@ -13,6 +13,11 @@ export type MarketDataRow = {
   MA50?: number | null;
   spread?: number | null;
 
+  volatility_20d?: number | null;
+  volume_ratio?: number | null;
+  distance_ma20?: number | null;
+  distance_ma50?: number | null;
+
   trend?: string | null;
   decision?: string | null;
 
