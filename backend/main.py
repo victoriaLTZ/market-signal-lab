@@ -47,8 +47,13 @@ def lagging(symbol: str = Query(..., min_length=1)):
         df = get_daily_prices_with_fallback(symbol)
         df = compute_indicators(df)
         df = generate_signals(df)
-
-        df = df.reset_index().rename(columns={"index": "date"})
+        # convertir l'index de dates en vraie colonne
+        df = df.reset_index()
+        
+        # renommer automatiquement la première colonne en "date"
+        df = df.rename(columns={df.columns[0]:"date"})
+        
+        # convertit la date en texte pour l'envoyer proprement au frontend
         df["date"] = df["date"].astype(str)
 
         # Remplacer inf, -inf et NaN par None pour JSON
@@ -57,7 +62,7 @@ def lagging(symbol: str = Query(..., min_length=1)):
 
         return {
             "symbol": symbol,
-            "data": df.where(df.notna(), None).to_dict(orient="records")
+            "data": df.to_dict(orient="records")
         }
 
     except Exception as e:
